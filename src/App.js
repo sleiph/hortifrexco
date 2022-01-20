@@ -16,20 +16,21 @@ import {
 
 function App() {
   const [carrinho, setCarrinho] = useState([])
+  const [isNoCarrinho, setIsNoCarrinho] = useState(false)
   
   return (
     <div>
-      <Navbar />
+      <Navbar carrinho={carrinho} onCarrinhoChange={setCarrinho} isNoCarrinho={isNoCarrinho} setIsNoCarrinho={setIsNoCarrinho} />
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home carrinho={carrinho} onCarrinhoChange={setCarrinho} />} />
-        <Route path="carrinho" element={<Carrinho />} />
-        <Route path="frutas" element={<Frutas />} />
-        <Route path="frutas/:caminho" element={<Fruta />} />
-        <Route path="about" element={<About />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home carrinho={carrinho} onCarrinhoChange={setCarrinho}  isNoCarrinho={isNoCarrinho} setIsNoCarrinho={setIsNoCarrinho} />} />
+          <Route path="carrinho" element={<Carrinho carrinho={carrinho} onCarrinhoChange={setCarrinho} />} />
+          <Route path="frutas" element={<Frutas />} />
+          <Route path="frutas/:caminho" element={<Fruta />} />
+          <Route path="about" element={<About />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }

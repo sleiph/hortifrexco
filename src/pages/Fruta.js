@@ -14,7 +14,6 @@ export default function Fruta() {
         console.error("ops! ocorreu um erro: " + err);
       });
   }, []);
-  console.log(caminho)
 
   return (
     <div className="App">

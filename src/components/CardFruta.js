@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components'
@@ -15,17 +15,27 @@ const CardFrutadiv = styled.div`
   }
 `
 
+function ConfereArray(arr, ele) {
+  let temp = arr
+  for (let i=0; i<arr.length; i++) {
+    if (arr[i] === ele) {
+      temp.splice(i, 1)
+      return temp
+    }
+  }
+  return temp.concat([ele])
+}
+
 function CardFruta({ fruta, carrinho, onCarrinhoChange }) {
-  const handleCarrinhoChange = useCallback(() => {
-    carrinho.push(fruta.name)
-    onCarrinhoChange(carrinho)
-  }, [onCarrinhoChange])
 
   return (
     <CardFrutadiv>
       <img src="" alt={"imagem da " + fruta.name} />
       <p>{fruta.name}</p>
-      <button onClick={ handleCarrinhoChange }>adicionar ao carrinho</button>
+
+      <button onClick={ () => {
+        onCarrinhoChange(ConfereArray(carrinho, fruta.name))
+      } }>adicionar ao carrinho</button>
       <Link to={`./frutas/${fruta.name}`} >
         <p>informações nutricionais</p>
       </ Link>
