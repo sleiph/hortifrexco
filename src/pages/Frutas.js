@@ -16,7 +16,7 @@ const Grid = styled.div`
   }
 `
 
-export default function Frutas(  ) {
+function Frutas({ carrinho, onCarrinhoChange }) {
   const [frutas, setFrutas] = useState();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Frutas(  ) {
       {
         frutas?.map(fruta => {
           return(
-            <CardFruta fruta={fruta} key={fruta.name} />
+            <CardFruta fruta={fruta} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} key={fruta.name} />
           );
         })
       }
@@ -41,3 +41,5 @@ export default function Frutas(  ) {
     </Grid>
   );
 }
+
+export default Frutas

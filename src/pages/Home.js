@@ -1,6 +1,6 @@
-import React from "react";
-
 import Frutas from './Frutas'
+
+import React, { useState } from "react";
 
 import styled from 'styled-components'
 
@@ -9,12 +9,16 @@ const Container = styled.div`
   margin: 0 auto;
 `
 
-export default function Home(  ) {
+function Home({ carrinho, onCarrinhoChange }) {
+  const [carrinhoLen, setCarrinhoLen] = useState(0)
 
   return (
     <Container>
       <h1>Produtos</h1>
-      <Frutas />
+      <Frutas carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} />
+
     </Container>
   );
 }
+
+export default Home

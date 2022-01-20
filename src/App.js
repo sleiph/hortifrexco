@@ -7,20 +7,22 @@ import About from './pages/About'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 
-export default function App() {
+function App() {
+  const [carrinho, setCarrinho] = useState([])
+  
   return (
     <div>
       <Navbar />
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home carrinho={carrinho} onCarrinhoChange={setCarrinho} />} />
         <Route path="carrinho" element={<Carrinho />} />
         <Route path="frutas" element={<Frutas />} />
         <Route path="frutas/:caminho" element={<Fruta />} />
@@ -31,3 +33,5 @@ export default function App() {
     </div>
   );
 }
+
+export default App
