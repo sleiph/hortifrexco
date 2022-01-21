@@ -1,8 +1,7 @@
 import CardFruta from '../components/CardFruta'
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet } from 'react-router-dom';
-import api from "../services/api";
 
 import styled from 'styled-components'
 
@@ -25,22 +24,12 @@ const Grid = styled.div`
   }
 `
 
-function Frutas({ carrinho, onCarrinhoChange }) {
-  const [frutas, setFrutas] = useState();
-
-  useEffect(() => {
-    api
-      .get(`/api/fruit/all`,)
-      .then((response) => setFrutas(response.data))
-      .catch((err) => {
-        console.error("ops! ocorreu um erro: " + err);
-      });
-  }, []);
+function Frutas({ frutas, carrinho, onCarrinhoChange }) {
 
   return (
     <Grid >
       {
-        frutas?.map(fruta => {
+        frutas.map(fruta => {
           return(
             <CardFruta fruta={fruta} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} key={fruta.name} />
           );

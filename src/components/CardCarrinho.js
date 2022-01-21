@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from 'styled-components'
 
@@ -66,32 +66,42 @@ function spliceNoMutate(myArray,indexToRemove) {
 
 function ConfereArray(arr, ele) {
   for (let i=0; i<arr.length; i++) {
-    if (arr[i] === ele) {
+    if (arr[i].nome === ele.nome) {
       return spliceNoMutate(arr, i)
     }
   }
   return arr
 }
 
-function CardCarrinho({ fruta, carrinho, onCarrinhoChange }) {
+function CardCarrinho({ fruta, carrinho, onCarrinhoChange, total, onTotalChange }) {
   const [qnt, setQnt] = useState(1)
+
+  useEffect(() => {
+    onTotalChange(total + (fruta.preco * qnt));
+  }, [onTotalChange])
 
   return (
     <CardCarrinhodiv>
-      <img src="" alt={"imagem da " + fruta} />
+      <img src={fruta.imagem} alt={"imagem da " + fruta.nome} />
       <div className="ids-card-carrinho">
-        <h4>{fruta}</h4>
-        <p>quantidade: {qnt}</p>
+        <h4>{fruta.nome} - {qnt} {fruta.quantidade}</h4>
+        <p>R$ {(fruta.preco * qnt).toFixed(2)}</p>
       </div>
       
       <div className="botoes-card-carrinho">
         <button id="sub" onClick={ () => {
-          if (qnt > 1)
+          if (qnt > 1) {
             setQnt(qnt-1)
+            onTotalChange(total - fruta.preco)
+          }
         }}>-</button>
-        <button id="add" onClick={ () => setQnt(qnt+1) }>+</button>
+        <button id="add" onClick={ () => {
+          setQnt(qnt+1)
+          onTotalChange(total + fruta.preco)
+        }}>+</button>
 
         <button id="rmv" onClick={ () => {
+          onTotalChange(total - (fruta.preco*qnt))
           onCarrinhoChange( ConfereArray(carrinho, fruta) )
         }}>remover</button>
       </div>

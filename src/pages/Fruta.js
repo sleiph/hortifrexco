@@ -1,3 +1,5 @@
+import api from "../services/api";
+
 import React, { useEffect, useState } from "react";
 
 import styled from 'styled-components'
@@ -24,17 +26,33 @@ const CardNutricaoDiv = styled.div`
   }
 `
 
-export default function Fruta({ fruta }) {
+export default function Fruta({ fruta, isHovering }) {
+  const [info, setInfo] = useState();
+
+  useEffect(() => {
+    api
+      .get(`/api/fruit/${fruta.name}`)
+      .then((response) => setInfo(response.data))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro: " + err);
+      });
+  }, []);
+
   return (
-    <CardNutricaoDiv>
+    <CardNutricaoDiv style={{display: isHovering ? 'block' : 'none' }} >
       <h4>Informações Nutricionais</h4>
-      <ul>
-        <li>Carboidratos: {fruta.nutritions.carbohydrates}</li>
-        <li>Proteínas: {fruta.nutritions.protein}</li>
-        <li>Gorduras: {fruta.nutritions.fat}</li>
-        <li>Calorias: {fruta.nutritions.calories}</li>
-        <li>Açúcares: {fruta.nutritions.sugar}</li>
-      </ul>
+      {
+        (info !== undefined) ?
+        <ul>
+          <li>Carboidratos: {info.nutritions.carbohydrates}</li>
+          <li>Proteínas: {info.nutritions.protein}</li>
+          <li>Gorduras: {info.nutritions.fat}</li>
+          <li>Calorias: {info.nutritions.calories}</li>
+          <li>Açúcares: {info.nutritions.sugar}</li>
+        </ul> :
+        <p>Buscando informações...</p>
+      }
+      
     </CardNutricaoDiv>
   );
 }

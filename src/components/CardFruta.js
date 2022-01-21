@@ -39,7 +39,7 @@ function spliceNoMutate(myArray,indexToRemove) {
 
 function ConfereArray(arr, ele) {
   for (let i=0; i<arr.length; i++) {
-    if (arr[i] === ele) {
+    if (arr[i].nome === ele.nome) {
       return spliceNoMutate(arr, i)
     }
   }
@@ -59,20 +59,20 @@ function CardFruta({ fruta, carrinho, onCarrinhoChange }) {
     <div>
       <CardFrutadiv>
         <div className='informacoes-card-fruta'>
-          <h3>{fruta.name}</h3>
-          <p>unidade</p>
-          <p>R$ 7,99</p>
+          <h3>{fruta.nome}</h3>
+          <p>{fruta.quantidade}</p>
+          <p>R$ {(fruta.preco).toFixed(2)}</p>
         </div>
 
         <div>
           <button onClick={ () => {
-            onCarrinhoChange(ConfereArray(carrinho, fruta.name))
+            onCarrinhoChange(ConfereArray(carrinho, fruta))
           } }>Adicionar</button>
           <p onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>🍽</p>
         </div>
         
       </CardFrutadiv>
-      {isHovering && <Fruta fruta={fruta}/>}
+      <Fruta fruta={fruta} isHovering={isHovering} />
     </div>
   );
 }

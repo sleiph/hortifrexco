@@ -8,22 +8,21 @@ import styled from 'styled-components'
 const Corpo = styled.main`
   display: grid;
   grid-auto-flow: column;
+  overflow: hidden;
 `
 
 const Container = styled.div`
   margin: 0 40px;
 `
 
-function Home({ carrinho, onCarrinhoChange, isNoCarrinho, setIsNoCarrinho }) {
+function Home({ frutas, carrinho, onCarrinhoChange, isNoCarrinho, setIsNoCarrinho }) {
   return (
     <Corpo>
-      {
-        (isNoCarrinho) ? <Carrinho carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} /> : <></>
-      }
+      <Carrinho isNoCarrinho={isNoCarrinho} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} />
       
       <Container>
         <h1>Produtos</h1>
-        <Frutas carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} />
+        <Frutas frutas={frutas} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} />
       </Container>
     </Corpo>
       
