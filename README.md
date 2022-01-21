@@ -26,4 +26,4 @@ chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
 ```
 Espero que não seja muito problema
 
-Por causa desse erro do CORS eu resolvi criar um json para visualizar os produtos, para caso a API não funcione o aplicativo continuar funcionando, mas da pra ver no histórico do github que eu sei como listar os produtos a partir da resposta da API. =)
+Por causa desse erro com o CORS eu resolvi listar os produtos a partir de um json, pra caso a API não funcione o aplicativo continuar funcionando. Mas da pra ver no histórico do github que eu sei como listar os produtos a partir da resposta da prórpia API, mais uma vez, desculpem o vacilo. =)
