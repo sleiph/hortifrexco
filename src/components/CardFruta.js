@@ -5,13 +5,38 @@ import React, { useState } from "react";
 import styled from 'styled-components'
 
 const CardFrutadiv = styled.div`
+  position: relative;
   min-width: 200px;
   height: 160px;
-  background: #fcc200;
   color: #000;
   text-align: center;
   display: grid;
   grid-template-rows: 2fr 1fr;
+  overflow: hidden;
+
+  img {
+    height: auto;
+    width: 100%;
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 0;
+  }
+
+  .tint {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: #fff;
+    opacity: .8;
+    transition: opacity 1s;
+  }
+  :hover .tint {
+    opacity: .6;
+  }
 
   .informacoes-card-fruta {
     align-self: center;
@@ -57,7 +82,9 @@ function CardFruta({ fruta, carrinho, onCarrinhoChange }) {
 
   return (
     <div>
-      <CardFrutadiv>
+      <CardFrutadiv >
+        <img src={`/img/${fruta.imagem}`} />
+        <div className='tint' />
         <div className='informacoes-card-fruta'>
           <h3>{fruta.nome}</h3>
           <p>{fruta.quantidade}</p>

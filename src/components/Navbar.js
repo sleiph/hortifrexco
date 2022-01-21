@@ -12,7 +12,7 @@ const NavBar = styled.header`
     margin-right: auto;
   }
   .logo {
-    height: 4.2rem;
+    height: 3.5rem;
     margin-right: auto;
   }
 
@@ -52,7 +52,7 @@ export default function Navbar({ carrinho, onCarrinhoChange, isNoCarrinho, setIs
     <NavBar>
       <span className="image-clickable">
         <a href="../">
-          <img src="" alt="main-logo" className="logo" />
+          <img src="/img/mecontratemplis-logo.svg" alt="main-logo" className="logo" />
         </a>
       </span>
       <nav>

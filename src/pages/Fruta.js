@@ -10,6 +10,7 @@ const CardNutricaoDiv = styled.div`
   margin-top: -5px;
   margin-left: 25px;
   padding: 12px;
+  z-index: 5;
 
   h4 {
     margin: 0;

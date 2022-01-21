@@ -18,6 +18,50 @@ const Aba = styled.div`
   }
 `
 
+const CarrinhoVazio = styled.div`
+  width: 100%;
+  height: 80px;
+  background: #d8d8d8;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+
+  p {
+    padding-left: 8px;
+  }
+`
+
+const TotalCard = styled.div`
+  padding: 8px;
+
+  h4 {
+    margin: 12px 0 6px 0;
+    padding: 0;
+  }
+  button {
+    padding: 8px 16px;
+    border: none;
+    font-size: 1em;
+  }
+
+  #finalizar {
+    background: #00b400;
+  }
+  #finalizar:hover {
+    background: #00cb00;
+  }
+
+  #limpar {
+    background: #eb5000;
+    float: right;
+  }
+  #limpar:hover {
+    background: #eb0500;
+  }
+
+`
+
+
 function Carrinho({ carrinho, onCarrinhoChange, isNoCarrinho }) {
   const [total, setTotal] = useState(0);
 
@@ -25,27 +69,30 @@ function Carrinho({ carrinho, onCarrinhoChange, isNoCarrinho }) {
     <Aba style={{display: isNoCarrinho ? 'block' : 'none' }} >
       <h2>Carrinho</h2>
       {
-      (carrinho !== undefined) ?
+      (carrinho.length > 0) ?
         carrinho.map(fruta => {
           return(
             <CardCarrinho key={fruta.nome} fruta={fruta} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} total={total} onTotalChange={setTotal} />
           );
         }) :
-        <></>
+        <CarrinhoVazio>
+          <p>Carrinho Vazio</p>
+        </CarrinhoVazio>
       }
-      <div className="total-carrinho">
-        <h4>Total</h4>
-        <p>R$ {(total).toFixed(2)}</p>
-        <button onClick={() => {
+
+      <TotalCard>
+        <h4>Total: R$ {(total).toFixed(2)}</h4>
+
+        <button id="finalizar" onClick={() => {
           console.log( "me contrata" )
         }}>Finalizar compra</button>
-      </div>
-      <div className="limpar-carrinho">
-        <button onClick={() => {
+
+        <button id="limpar" onClick={() => {
           onCarrinhoChange([])
           setTotal(0)
-        }}>Limpar carrinho</button>
-      </div>
+        }}>×</button>
+      </TotalCard>
+
     </Aba>
   );
 }

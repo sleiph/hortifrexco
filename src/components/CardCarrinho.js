@@ -6,12 +6,12 @@ const CardCarrinhodiv = styled.div`
   width: 100%;
   height: 80px;
   background: #d8d8d8;
-  color: #000;
   display: grid;
   grid-auto-flow: column;
   grid-gap: 8px;
   grid-template-columns: 80px auto 80px;
   margin-bottom: 8px;
+  overflow: hidden;
 
   &:hover {
     background: #ccc;
@@ -19,6 +19,8 @@ const CardCarrinhodiv = styled.div`
 
   img {
     background: #404040;
+    width: 80px;
+    height: auto;
   }
 
   .ids-card-carrinho {
@@ -82,7 +84,7 @@ function CardCarrinho({ fruta, carrinho, onCarrinhoChange, total, onTotalChange 
 
   return (
     <CardCarrinhodiv>
-      <img src={fruta.imagem} alt={"imagem da " + fruta.nome} />
+      <img src={`/img/${fruta.imagem}`} alt={"imagem da " + fruta.nome} />
       <div className="ids-card-carrinho">
         <h4>{fruta.nome} - {qnt} {fruta.quantidade}</h4>
         <p>R$ {(fruta.preco * qnt).toFixed(2)}</p>
