@@ -8,9 +8,6 @@ const Aba = styled.div`
   padding: 0;
   width: 320px;
   background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
 
   h2 {
     padding: 0 16px;
@@ -18,10 +15,6 @@ const Aba = styled.div`
 
   @media(max-width: 700px) {
     width: 100%;
-
-    p {
-      float: left;
-    }
   }
 `
 
@@ -30,13 +23,17 @@ function Carrinho({ carrinho, onCarrinhoChange }) {
   return (
     <Aba>
       <h2>Carrinho</h2>
-      {
+      { (carrinho !== undefined) ?
         carrinho.map(fruta => {
           return(
             <CardCarrinho key={fruta} fruta={fruta} carrinho={carrinho} onCarrinhoChange={onCarrinhoChange}/>
           );
-        })
+        }) :
+        <></>
       }
+      <div>
+
+      </div>
     </Aba>
   );
 }

@@ -7,12 +7,21 @@ import api from "../services/api";
 import styled from 'styled-components'
 
 const Grid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 15px;
 
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (max-width: 740px) {
+    grid-template-columns: 1fr 1fr;
+  }
   @media (max-width: 520px) {
-    display: grid;
+    grid-template-columns: auto;
   }
 `
 
@@ -21,7 +30,7 @@ function Frutas({ carrinho, onCarrinhoChange }) {
 
   useEffect(() => {
     api
-      .get(`/api/fruit/all`)
+      .get(`/api/fruit/all`,)
       .then((response) => setFrutas(response.data))
       .catch((err) => {
         console.error("ops! ocorreu um erro: " + err);

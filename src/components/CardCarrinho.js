@@ -21,6 +21,24 @@ const CardCarrinhodiv = styled.div`
     background: #404040;
   }
 
+  .ids-card-carrinho {
+    display: grid;
+    align-items: center; 
+    justify-content: left;
+    grid-gap: 6px;
+  }
+
+  h4, p {
+    margin: 0;
+    padding: 0;
+  }
+  h4 {
+    align-self: end;
+  }
+  p {
+    align-self: baseline;
+  }
+
   .botoes-card-carrinho {
     padding: 6px;
     display: grid;
@@ -42,21 +60,40 @@ const CardCarrinhodiv = styled.div`
   #rmv { grid-area: c; }
 `
 
+function spliceNoMutate(myArray,indexToRemove) {
+  return myArray.slice(0,indexToRemove).concat(myArray.slice(indexToRemove+1));
+}
+
+function ConfereArray(arr, ele) {
+  for (let i=0; i<arr.length; i++) {
+    if (arr[i] === ele) {
+      return spliceNoMutate(arr, i)
+    }
+  }
+  return arr
+}
+
 function CardCarrinho({ fruta, carrinho, onCarrinhoChange }) {
   const [qnt, setQnt] = useState(1)
 
   return (
     <CardCarrinhodiv>
       <img src="" alt={"imagem da " + fruta} />
-      <div>
-      <p>{fruta} {qnt}</p>
+      <div className="ids-card-carrinho">
+        <h4>{fruta}</h4>
+        <p>quantidade: {qnt}</p>
       </div>
       
       <div className="botoes-card-carrinho">
-        <button id="sub" onClick={ () => setQnt(qnt-1) }>-</button>
+        <button id="sub" onClick={ () => {
+          if (qnt > 1)
+            setQnt(qnt-1)
+        }}>-</button>
         <button id="add" onClick={ () => setQnt(qnt+1) }>+</button>
 
-        <button id="rmv">remover</button>
+        <button id="rmv" onClick={ () => {
+          onCarrinhoChange( ConfereArray(carrinho, fruta) )
+        }}>remover</button>
       </div>
       
     </CardCarrinhodiv>

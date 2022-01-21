@@ -6,12 +6,12 @@ import React from "react";
 import styled from 'styled-components'
 
 const Corpo = styled.main`
-
+  display: grid;
+  grid-auto-flow: column;
 `
 
 const Container = styled.div`
-  max-width: 80vw;
-  margin: 0 auto;
+  margin: 0 40px;
 `
 
 function Home({ carrinho, onCarrinhoChange, isNoCarrinho, setIsNoCarrinho }) {
@@ -21,7 +21,7 @@ function Home({ carrinho, onCarrinhoChange, isNoCarrinho, setIsNoCarrinho }) {
         (isNoCarrinho) ? <Carrinho carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} /> : <></>
       }
       
-      <Container style={{paddingLeft:(isNoCarrinho)? '400px' : '0'}}>
+      <Container>
         <h1>Produtos</h1>
         <Frutas carrinho={carrinho} onCarrinhoChange={onCarrinhoChange} />
       </Container>

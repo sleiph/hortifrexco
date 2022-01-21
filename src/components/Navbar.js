@@ -18,6 +18,8 @@ const NavBar = styled.header`
 
   .nav-links {
     list-style: none;
+    margin: 0;
+    padding: 0;
   }
   .nav-links li {
     display: inline-block;
@@ -31,13 +33,19 @@ const NavBar = styled.header`
   .nav-links li button:hover {
     color: #eb5000;
   }
+
+  #carrinho {
+    font-size: 2em;
+  }
+  span {
+    font-size: 1em;
+  }
 `
   
 export default function Navbar({ carrinho, onCarrinhoChange, isNoCarrinho, setIsNoCarrinho }) {
   const handleIsNoCarrinhoChange = useCallback(() => {
     isNoCarrinho = !isNoCarrinho
     setIsNoCarrinho(isNoCarrinho)
-    console.log(isNoCarrinho)
   }, [setIsNoCarrinho])
 
   return (
@@ -49,7 +57,7 @@ export default function Navbar({ carrinho, onCarrinhoChange, isNoCarrinho, setIs
       </span>
       <nav>
         <ul className="nav-links">
-          <li><button onClick={handleIsNoCarrinhoChange}>Carrinho <span>
+          <li><button id="carrinho" onClick={handleIsNoCarrinhoChange}>🛒 <span>
             {(carrinho.length>0) ? new Set(carrinho).size : ""}
           </span></button></li>
         </ul>
